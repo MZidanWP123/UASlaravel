@@ -19,9 +19,9 @@ Route::middleware('auth')->group(function () {
 
 
 
-// Route::get('/', function () {
-//     return view('index', ['judul' => 'About Us']);
-// });
+Route::get('/', function () {
+    return view('main', ['judul' => 'About Us']);
+});
 
 //Route::post('/users/store', [UserController::class, 'store']);
 
