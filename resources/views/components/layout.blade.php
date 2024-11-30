@@ -14,9 +14,6 @@
 </head>
 
 <body class="h-full">
-
-
-
     <div class="min-h-screen flex flex-col">
         <x-drawer>
             <x-navbar-v2 />
@@ -34,9 +31,7 @@
 
             {{-- <x-footer></x-footer> --}}
         </x-drawer>
-
     </div>
-
 </body>
 
 </html>

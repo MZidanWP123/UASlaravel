@@ -18,7 +18,7 @@
                     <ul>
                         <li><a href="{{ route('master-kelas.index') }}"
                                 class="text-xl {{ Request::is('master/kelas*') ? 'active' : '' }}">Kelas</a></li>
-                        <li><a class="text-xl">Submenu 2</a></li>
+                        <li><a href="#" class="text-xl ">Murid</a></li>
                     </ul>
                 </details>
             </li>
