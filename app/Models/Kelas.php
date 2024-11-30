@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Kela extends Model
+class Kelas extends Model
 {
 	protected $table = 'kelas';
 
