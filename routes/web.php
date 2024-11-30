@@ -37,3 +37,4 @@ Route::get('/', function () {
 //     // dd(request(['search']));
 //     return view('posts', ['judul' => 'Blog Page', 'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->paginate(5)->withQueryString()]);    
 // });
+require __DIR__ . '/master-kelas.php';
