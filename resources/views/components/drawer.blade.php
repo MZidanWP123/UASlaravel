@@ -5,11 +5,24 @@
     </div>
     <div class="drawer-side">
         <label for="my-drawer" class="drawer-overlay"></label>
-        <ul class="menu p-4 w-80 bg-base-100 text-base-content h-full">
-            <!-- Sidebar content here -->
-            <li><a>Homepage</a></li>
-            <li><a>Portfolio</a></li>
-            <li><a>About</a></li>
+
+        <ul class="menu bg-base-200 rounded-box w-80 h-full p-10">
+            {{-- Judul App --}}
+            <div class="mb-5">
+                <span class="font-extrabold text-3xl"> <i class="ri-graduation-cap-line text-4xl"></i> AbsensiApp</span>
+            </div>
+            {{-- Menu --}}
+            <li>
+                <details {{ Request::is('master/*') ? 'open' : '' }}>
+                    <summary class="text-2xl font-bold ">Master</summary>
+                    <ul>
+                        <li><a href="{{ route('master-kelas.index') }}"
+                                class="text-xl {{ Request::is('master/kelas*') ? 'active' : '' }}">Kelas</a></li>
+                        <li><a class="text-xl">Submenu 2</a></li>
+                    </ul>
+                </details>
+            </li>
+
         </ul>
     </div>
 </div>
