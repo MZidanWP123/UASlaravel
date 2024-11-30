@@ -10,34 +10,31 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Absensi
+ * Class JadwalMurid
  * 
  * @property int $id
  * @property int $jadwal_id
- * @property int $user_id
- * @property Carbon $waktu_checkin
+ * @property int $murid_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
  * @property Jadwal $jadwal
- * @property User $user
+ * @property Murid $murid
  *
  * @package App\Models
  */
-class Absensi extends Model
+class JadwalMurid extends Model
 {
-	protected $table = 'absensi';
+	protected $table = 'jadwal_murid';
 
 	protected $casts = [
 		'jadwal_id' => 'int',
-		'user_id' => 'int',
-		'waktu_checkin' => 'datetime'
+		'murid_id' => 'int'
 	];
 
 	protected $fillable = [
 		'jadwal_id',
-		'user_id',
-		'waktu_checkin'
+		'murid_id'
 	];
 
 	public function jadwal()
@@ -45,8 +42,8 @@ class Absensi extends Model
 		return $this->belongsTo(Jadwal::class);
 	}
 
-	public function user()
+	public function murid()
 	{
-		return $this->belongsTo(User::class);
+		return $this->belongsTo(Murid::class);
 	}
 }

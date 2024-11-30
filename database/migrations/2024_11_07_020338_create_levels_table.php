@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('levels', function (Blueprint $table) {
+        Schema::create('level', function (Blueprint $table) {
             $table->id();
             $table->string('nama_level');
             $table->timestamps();

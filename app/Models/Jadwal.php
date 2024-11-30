@@ -1,19 +1,81 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Jadwal
+ * 
+ * @property int $id
+ * @property string $hari
+ * @property int $kelas_id
+ * @property int $level_id
+ * @property int $guru_id
+ * @property time without time zone $jam_mulai
+ * @property time without time zone $jam_selesai
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property Kela $kela
+ * @property Level $level
+ * @property Guru $guru
+ * @property Collection|Murid[] $murids
+ * @property Collection|Absensi[] $absensis
+ *
+ * @package App\Models
+ */
 class Jadwal extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'jam_masuk',
-        'jam_keluar'
-    ];
+	protected $table = 'jadwal';
 
-    public function absensi(){
-        return $this->hasOne(Absensi::class, 'id_jadwal');
-    }
+	protected $casts = [
+		'kelas_id' => 'int',
+		'level_id' => 'int',
+		'guru_id' => 'int',
+		'jam_mulai' => 'time without time zone',
+		'jam_selesai' => 'time without time zone'
+	];
+
+	protected $fillable = [
+		'hari',
+		'kelas_id',
+		'level_id',
+		'guru_id',
+		'jam_mulai',
+		'jam_selesai'
+	];
+
+	public function kela()
+	{
+		return $this->belongsTo(Kela::class, 'kelas_id');
+	}
+
+	public function level()
+	{
+		return $this->belongsTo(Level::class);
+	}
+
+	public function guru()
+	{
+		return $this->belongsTo(Guru::class);
+	}
+
+	public function murids()
+	{
+		return $this->belongsToMany(Murid::class)
+					->withPivot('id')
+					->withTimestamps();
+	}
+
+	public function absensis()
+	{
+		return $this->hasMany(Absensi::class);
+	}
 }

@@ -1,36 +1,55 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Guru
+ * 
+ * @property int $id
+ * @property int $user_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property User $user
+ * @property Collection|Level[] $levels
+ * @property Collection|Jadwal[] $jadwals
+ *
+ * @package App\Models
+ */
 class Guru extends Model
 {
-    use HasFactory;
+	protected $table = 'guru';
 
-    protected $table = 'gurus';
-    
-    protected $fillable = [
-        'nama',
-        'username',
-        'passwrord',
-        'id_kelas'
-    ];
+	protected $casts = [
+		'user_id' => 'int'
+	];
 
-    protected $hidden = [
-        'password'
-    ];
+	protected $fillable = [
+		'user_id'
+	];
 
-    public function level(){
-        return $this->belongsToMany(level::class, 'guru_level', 'id_guru', 'id_level');
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 
-    public function kelas(){
-        return $this->belongsTo(Kelas::class, 'id_kelas');
-    }
+	public function levels()
+	{
+		return $this->belongsToMany(Level::class)
+					->withPivot('id')
+					->withTimestamps();
+	}
 
-    public function absensi(){
-        return $this->hasMany(Absensi::class, 'id_guru');
-    }
+	public function jadwals()
+	{
+		return $this->hasMany(Jadwal::class);
+	}
 }

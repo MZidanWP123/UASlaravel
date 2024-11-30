@@ -1,25 +1,51 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Level
+ * 
+ * @property int $id
+ * @property string $nama_level
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property Collection|Murid[] $murids
+ * @property Collection|Guru[] $gurus
+ * @property Collection|Jadwal[] $jadwals
+ *
+ * @package App\Models
+ */
 class Level extends Model
 {
-    use HasFactory;
+	protected $table = 'level';
 
-    protected $table = 'levels';
+	protected $fillable = [
+		'nama_level'
+	];
 
-    protected $fillable = [
-        "nama_level"
-    ];
+	public function murids()
+	{
+		return $this->hasMany(Murid::class);
+	}
 
-    public function guru(){
-        return $this->belongsToMany(Guru::class, 'guru_level', 'id_level', 'id_guru');
-    }
+	public function gurus()
+	{
+		return $this->belongsToMany(Guru::class)
+					->withPivot('id')
+					->withTimestamps();
+	}
 
-    public function murid(){
-        return $this->hasMany(Murid::class, 'id_level');
-    }
+	public function jadwals()
+	{
+		return $this->hasMany(Jadwal::class);
+	}
 }
