@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guru_levels', function (Blueprint $table) {
+        Schema::create('guru_level', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_guru')->constrained('gurus')->onDelete('cascade');
-            $table->foreignId('id_level')->constrained('levels')->onDelete('cascade');
+            $table->unsignedBigInteger('guru_id');
+            $table->foreign(['guru_id'], 'guru_level_guru_id_foreign')->references(['id'])->on('guru');
+            $table->unsignedBigInteger('level_id');
+            $table->foreign(['level_id'], 'guru_level_level_id_foreign')->references(['id'])->on('level');
             $table->timestamps();
         });
     }
