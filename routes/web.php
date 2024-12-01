@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\WebView\PresensiController;
 
 //Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 // Route::post('/web/login', [AuthController::class, 'login']);
@@ -15,9 +16,11 @@ Route::middleware('auth:web')->group(function () {
     // Route::get('/absensis/{id}', [AbsensiController::class, 'show']);
     // Route::put('/absensis/{id}', [AbsensiController::class, 'update']);
     // Route::delete('/absensis/{id}', [AbsensiController::class, 'destroy']);
-    Route::get('/', function () {
-        return view('main', ['judul' => 'About Us']);
-    });
+    // Route::get('/', function () {
+    //     return view('main', ['judul' => 'About Us']);
+    // });
+    Route::get('/', [PresensiController::class, 'index'])->name('presensi.index');
+    Route::get('/presensi', [PresensiController::class, 'presensi'])->name('presensi.absen');
 });
 
 
@@ -40,3 +43,4 @@ Route::middleware('auth:web')->group(function () {
 // });
 require __DIR__ . '/master-kelas.php';
 require __DIR__ . '/auth.php';
+require __DIR__ . '/presensi.php';

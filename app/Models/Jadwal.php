@@ -39,8 +39,8 @@ class Jadwal extends Model
 		'kelas_id' => 'int',
 		'level_id' => 'int',
 		'guru_id' => 'int',
-		'jam_mulai' => 'time without time zone',
-		'jam_selesai' => 'time without time zone'
+		'jam_mulai' => 'string',
+		'jam_selesai' => 'string'
 	];
 
 	protected $fillable = [
@@ -52,9 +52,9 @@ class Jadwal extends Model
 		'jam_selesai'
 	];
 
-	public function kela()
+	public function kelas()
 	{
-		return $this->belongsTo(Kela::class, 'kelas_id');
+		return $this->belongsTo(Kelas::class, 'kelas_id');
 	}
 
 	public function level()
